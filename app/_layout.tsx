@@ -2,10 +2,12 @@ import { Slot, useRouter } from 'expo-router';
 import { AuthProvider, AuthContext } from '../context/AuthContext';
 import { useContext, useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
+import Header from '../components/Header';
 
 export default function Layout() {
   return (
     <AuthProvider>
+      <Header />
       <MainLayout />
     </AuthProvider>
   );
