@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '@env';
 
 export default function LoginScreen() {
   const { login } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export default function LoginScreen() {
     setLoading(true);
     setMessage('');
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password,
       });
