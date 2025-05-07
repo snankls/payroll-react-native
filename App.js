@@ -1,13 +1,13 @@
-//import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-//import AppNavigator from './src/navigation/AppNavigator';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './app/context/AuthContext';  // Import the AuthContext provider
+import Layout from './app/(drawer)/_layout';  // Import the layout component that contains your navigators
 
 export default function App() {
   return (
-    <AuthProvider>
+    <AuthProvider>  {/* Wrap your app with AuthProvider */}
       <NavigationContainer>
-        {/* <AppNavigator /> */}
+        <Layout />  {/* The main layout for your app */}
       </NavigationContainer>
     </AuthProvider>
   );

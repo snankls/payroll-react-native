@@ -2,7 +2,6 @@ import { Slot, useRouter } from 'expo-router';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { useContext, useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import Header from './components/Header';
 
 export default function Layout() {
   return (
@@ -18,7 +17,7 @@ function MainLayout() {
 
   useEffect(() => {
     if (!loading) {
-      router.replace(userToken ? '/dashboard' : '/login');
+      router.replace(userToken ? '/DashboardScreen' : '/login');
     }
   }, [userToken, loading]);
 
