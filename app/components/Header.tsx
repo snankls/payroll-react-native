@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,33 +7,39 @@ import {
   StyleSheet,
   Pressable,
 } from 'react-native';
-import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router'; // ✅ Correct import
+import { AuthContext } from '../context/AuthContext';
 
 export default function Header() {
   const navigation = useNavigation();
+  const router = useRouter();
+  const { logout } = useContext(AuthContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
-  const handleOption = (option: string) => {
-    console.log(`${option} selected`);
+  const handleOption = async (option: string) => {
     setDropdownVisible(false);
+    if (option === 'Logout') {
+      await logout();
+      router.replace('/login'); // ✅ Redirect after logout
+    } else {
+      console.log(`${option} selected`);
+    }
   };
 
   return (
     <View style={styles.header}>
-      {/* Left: Hamburger */}
       <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
         <Ionicons name="menu" size={28} color="#333" />
       </TouchableOpacity>
 
-      {/* Center: Logo */}
       <Text style={styles.logo}>My App</Text>
 
-      {/* Right: User Image */}
       <TouchableOpacity onPress={toggleDropdown}>
         <Image
           source={{ uri: 'https://i.pravatar.cc/300' }}
@@ -41,7 +47,6 @@ export default function Header() {
         />
       </TouchableOpacity>
 
-      {/* Dropdown */}
       {dropdownVisible && (
         <View style={styles.dropdown}>
           <Pressable onPress={() => handleOption('Profile')}>

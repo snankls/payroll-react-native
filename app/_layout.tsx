@@ -1,13 +1,12 @@
 import { Slot, useRouter } from 'expo-router';
-import { AuthProvider, AuthContext } from '../context/AuthContext';
+import { AuthProvider, AuthContext } from './context/AuthContext';
 import { useContext, useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import Header from '../components/Header';
+import Header from './components/Header';
 
 export default function Layout() {
   return (
     <AuthProvider>
-      <Header />
       <MainLayout />
     </AuthProvider>
   );
@@ -31,5 +30,15 @@ function MainLayout() {
     );
   }
 
-  return <Slot />;
+  return (
+    <View style={{ flex: 1 }}>
+      {userToken && (
+        <View style={{ zIndex: 1, elevation: 4 }}>
+        </View>
+      )}
+      <View style={{ flex: 1, zIndex: 0 }}>
+        <Slot />
+      </View>
+    </View>
+  );
 }
