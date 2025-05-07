@@ -1,6 +1,6 @@
+import { useContext, useEffect } from 'react';
 import { Slot, useRouter } from 'expo-router';
 import { AuthProvider, AuthContext } from './context/AuthContext';
-import { useContext, useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
 export default function Layout() {

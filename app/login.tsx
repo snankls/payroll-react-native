@@ -27,7 +27,7 @@ export default function LoginScreen() {
       const userData = response.data.data.user;
 
       await login(token, userData);
-      router.replace('/dashboard');
+      router.replace('/DashboardScreen');
     } catch (error: any) {
       if (error.response?.data?.message) {
         setMessage(error.response.data.message);
